@@ -1,0 +1,238 @@
+
+
+
+Q1. SELECT * FROM customers;
+
+ customer_id | first_name | last_name |         email          |   city    |    state     | join_date  | is_premium
+-------------|------------|-----------|------------------------|-----------|--------------|------------|------------
+         101 | Aarav      | Sharma    | aarav.s@email.com      | Mumbai    | Maharashtra  | 2024-01-15 | 1
+         102 | Priya      | Patel     | priya.p@email.com      | Ahmedabad | Gujarat      | 2024-02-20 | 0
+         103 | Rohan      | Gupta     | rohan.g@email.com      | Delhi     | Delhi        | 2024-03-10 | 1
+         104 | Sneha      | Reddy     | sneha.r@email.com      | Hyderabad | Telangana    | 2024-04-05 | 0
+         105 | Vikram     | Singh     | vikram.s@email.com     | Jaipur    | Rajasthan    | 2024-05-12 | 1
+         106 | Ananya     | Iyer      | ananya.i@email.com     | Chennai   | Tamil Nadu   | 2024-06-18 | 0
+         107 | Karan      | Mehta     | karan.m@email.com      | Pune      | Maharashtra  | 2024-07-22 | 1
+         108 | Divya      | Nair      | divya.n@email.com      | Kochi     | Kerala       | 2024-08-30 | 0
+
+  Rows returned: 8
+
+
+Q2. SELECT first_name, last_name, city FROM customers;
+
+ first_name | last_name |   city
+------------|-----------|----------
+ Aarav      | Sharma    | Mumbai
+ Priya      | Patel     | Ahmedabad
+ Rohan      | Gupta     | Delhi
+ Sneha      | Reddy     | Hyderabad
+ Vikram     | Singh     | Jaipur
+ Ananya     | Iyer      | Chennai
+ Karan      | Mehta     | Pune
+ Divya      | Nair      | Kochi
+
+  Rows returned: 8
+
+Q3. SELECT DISTINCT category FROM products;
+
+    category
+-------------
+ Electronics
+ Clothing
+ Home
+
+  Rows returned: 3
+
+Q4. SELECT * FROM orders WHERE status = 'Delivered';
+
+ order_id | customer_id | order_date |  status   | total_amount
+----------|-------------|------------|-----------|-------------
+     1001 |         101 | 2024-08-01 | Delivered |      4498.00
+     1002 |         102 | 2024-08-03 | Delivered |       799.00
+     1004 |         101 | 2024-08-10 | Delivered |      3499.00
+     1006 |         105 | 2024-08-15 | Delivered |      5898.00
+     1008 |         103 | 2024-08-20 | Delivered |       899.00
+     1010 |         108 | 2024-08-28 | Delivered |      1598.00
+
+  Rows returned: 6
+
+
+Q5. Electronics products with unit_price > 2000
+
+    product_name   |   category   | unit_price
+--------------------|--------------|------------
+ Smart Watch        | Electronics  |    2999.00
+ Bluetooth Speaker  | Electronics  |    3499.00
+
+  Rows returned: 2
+
+
+Q6. Customers from Maharashtra who joined in 2024
+--------------------------------------------------------------------------------
+ customer_id | first_name | last_name |        email        |  city  |    state    | join_date  | is_premium
+-------------|------------|-----------|---------------------|--------|-------------|------------|------------
+         101 | Aarav      | Sharma    | aarav.s@email.com   | Mumbai | Maharashtra | 2024-01-15 | 1
+         107 | Karan      | Mehta     | karan.m@email.com   | Pune   | Maharashtra | 2024-07-22 | 1
+
+  Rows returned: 2
+
+
+Q7. Orders between 2024-08-10 and 2024-08-25 (not cancelled)
+
+ order_id | customer_id | order_date |  status   | total_amount
+----------|-------------|------------|-----------|-------------
+     1004 |         101 | 2024-08-10 | Delivered |      3499.00
+     1006 |         105 | 2024-08-15 | Delivered |      5898.00
+     1007 |         106 | 2024-08-18 | Pending   |      1299.00
+     1008 |         103 | 2024-08-20 | Delivered |       899.00
+     1009 |         107 | 2024-08-25 | Shipped   |      6098.00
+
+  Rows returned: 5
+
+
+Q8. SELECT COUNT(*) AS total_orders FROM orders;
+
+ total_orders
+--------------
+           10
+
+  Rows returned: 1
+
+
+
+Q9. SELECT SUM(total_amount) AS total_revenue FROM orders WHERE status = 'Delivered';
+
+ total_revenue
+---------------
+      17191.00
+
+  Rows returned: 1
+
+
+Q10. AVG unit_price per category
+
+    category   | avg_price
+---------------|----------
+ Clothing      |   2699.00
+ Electronics   |   2224.00
+ Home          |    949.00
+
+  Rows returned: 3
+
+
+
+Q11. Order count and total revenue per status (sorted by revenue DESC)
+
+   status   | order_count | total_revenue
+------------|-------------|---------------
+ Delivered  |           6 |      17191.00
+ Shipped    |           2 |      13596.00
+ Cancelled  |           1 |       2999.00
+ Pending    |           1 |       1299.00
+
+  Rows returned: 4
+
+
+
+Q12. MAX and MIN unit_price per category
+
+    category   | max_price | min_price
+---------------|-----------|----------
+ Clothing      |   4599.00 |    799.00
+ Electronics   |   3499.00 |    899.00
+ Home          |   1299.00 |    599.00
+
+  Rows returned: 3
+
+
+
+Q13. Categories where AVG unit_price > 2000 (HAVING)
+
+    category   | avg_price
+---------------|----------
+ Clothing      |   2699.00
+ Electronics   |   2224.00
+
+  Rows returned: 2  (Home excluded: avg = 949.00)
+
+Q14. INNER JOIN: orders + customer names
+
+ order_id | order_date | first_name | last_name | total_amount
+----------|------------|------------|-----------|-------------
+     1001 | 2024-08-01 | Aarav      | Sharma    |      4498.00
+     1002 | 2024-08-03 | Priya      | Patel     |       799.00
+     1003 | 2024-08-05 | Rohan      | Gupta     |      7498.00
+     1004 | 2024-08-10 | Aarav      | Sharma    |      3499.00
+     1005 | 2024-08-12 | Sneha      | Reddy     |      2999.00
+     1006 | 2024-08-15 | Vikram     | Singh     |      5898.00
+     1007 | 2024-08-18 | Ananya     | Iyer      |      1299.00
+     1008 | 2024-08-20 | Rohan      | Gupta     |       899.00
+     1009 | 2024-08-25 | Karan      | Mehta     |      6098.00
+     1010 | 2024-08-28 | Divya      | Nair      |      1598.00
+
+  Rows returned: 10
+
+Q15. LEFT JOIN: all customers + their orders (NULLs if no orders)
+
+ customer_id | first_name | last_name | order_id | order_date |  status
+-------------|------------|-----------|----------|------------|-----------
+         101 | Aarav      | Sharma    |     1001 | 2024-08-01 | Delivered
+         101 | Aarav      | Sharma    |     1004 | 2024-08-10 | Delivered
+         102 | Priya      | Patel     |     1002 | 2024-08-03 | Delivered
+         103 | Rohan      | Gupta     |     1003 | 2024-08-05 | Shipped
+         103 | Rohan      | Gupta     |     1008 | 2024-08-20 | Delivered
+         104 | Sneha      | Reddy     |     1005 | 2024-08-12 | Cancelled
+         105 | Vikram     | Singh     |     1006 | 2024-08-15 | Delivered
+         106 | Ananya     | Iyer      |     1007 | 2024-08-18 | Pending
+         107 | Karan      | Mehta     |     1009 | 2024-08-25 | Shipped
+         108 | Divya      | Nair      |     1010 | 2024-08-28 | Delivered
+
+  Rows returned: 10  (all customers have at least one order — no NULLs here)
+
+
+
+Q16. 3-Table JOIN: orders -> order_items -> products
+
+ order_id |      product_name      | quantity | unit_price | discount_pct
+----------|------------------------|----------|------------|-------------
+     1001 | Wireless Earbuds       |        2 |    1499.00 |         0.00
+     1001 | Laptop Stand           |        1 |     899.00 |        10.00
+     1002 | Cotton T-Shirt         |        1 |     799.00 |         0.00
+     1003 | Smart Watch            |        1 |    2999.00 |         0.00
+     1003 | Running Shoes          |        1 |    4599.00 |         5.00
+     1004 | Bluetooth Speaker      |        1 |    3499.00 |         0.00
+     1005 | Smart Watch            |        1 |    2999.00 |         0.00
+     1006 | Wireless Earbuds       |        1 |    1499.00 |        10.00
+     1006 | Running Shoes          |        1 |    4599.00 |         5.00
+     1007 | Bedsheet Set           |        1 |    1299.00 |         0.00
+     1008 | Laptop Stand           |        1 |     899.00 |         0.00
+     1009 | Bluetooth Speaker      |        1 |    3499.00 |         0.00
+     1009 | Cushion Covers (Set)   |        2 |     599.00 |        15.00
+     1010 | Bedsheet Set           |        1 |    1299.00 |         0.00
+     1010 | Cushion Covers (Set)   |        1 |     599.00 |         0.00
+
+  Rows returned: 15
+
+
+Q17. CASE: product price tiers
+
+        product_name       | unit_price | price_tier
+---------------------------|------------|------------
+ Wireless Earbuds          |    1499.00 | Mid-Range
+ Cotton T-Shirt            |     799.00 | Budget
+ Smart Watch               |    2999.00 | Mid-Range
+ Running Shoes             |    4599.00 | Premium
+ Bluetooth Speaker         |    3499.00 | Premium
+ Bedsheet Set              |    1299.00 | Mid-Range
+ Laptop Stand              |     899.00 | Budget
+ Cushion Covers (Set)      |     599.00 | Budget
+
+  Rows returned: 8
+  Budget: 3 products | Mid-Range: 3 products | Premium: 2 products
+
+Q18. CASE inside SUM: Delivered vs Not Delivered (single row)
+
+ delivered | not_delivered
+-----------|---------------
+         6 |             4
+
+  Rows returned: 1
