@@ -1,0 +1,27 @@
+DATA QUALITY REPORT
+============================================================
+
+ORDERS
+------------------------------------------------------------
+  Total rows                         : 900
+  Missing customer_id                : 48
+  Rows in wrong date format (DD-MM-YYYY): 58
+  Dates that failed to parse entirely: 0
+
+PRODUCTS
+------------------------------------------------------------
+  Total rows                         : 520
+  Messy product names (fixed)        : 69
+
+CUSTOMERS
+------------------------------------------------------------
+  Total rows                         : 550
+  Invalid emails                     : 7
+  Invalid email customer_ids         : [8, 220, 256, 284, 300, 473, 487]
+
+ORDER_ITEMS
+------------------------------------------------------------
+  Total rows                         : 2240
+  Orphan rows (order_id not in orders): 22 (removed from cleaned data)
+  Negative quantity rows (returns)   : 85
+  discount_percent out of [0,100]    : 0
